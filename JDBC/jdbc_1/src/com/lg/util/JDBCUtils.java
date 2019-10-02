@@ -1,6 +1,5 @@
 package com.lg.util;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
@@ -35,7 +34,6 @@ public class JDBCUtils {
 
     /**
      * 关闭资源操作
-     * @param is
      * @param connection
      * @param ps
      */
@@ -55,5 +53,32 @@ public class JDBCUtils {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void closeResource(ResultSet resultSet, Connection connection, Statement ps) {
+
+        //7、资源关闭
+        if(resultSet != null) {
+            try {
+                resultSet.close();
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if(ps != null) {
+            try {
+                ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if(connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 }
